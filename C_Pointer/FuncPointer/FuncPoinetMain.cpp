@@ -1,38 +1,34 @@
 #include <iostream>
 
-int add(int numA, int numB)
+int Add(int numA, int numB)
 {
 	return numA + numB;
 }
 
-int sub(int numA, int numB)
+int Sub(int numA, int numB)
 {
 	return numA - numB;
 }
 
 typedef int (*fptrOperator)(int, int);
+fptrOperator operations[128] = { NULL };
 
-fptrOperator select(char a)
+void InitOper()
 {
-	switch (a)
-	{
-	case '+':
-			return add;
-	case '-':
-		return sub;
-	default:
-		break;
-	}
+	operations['+'] = Add;
+	operations['-'] = Sub;
 }
 
 int evaluate(char opcode, int num1, int num2)
 {
-	fptrOperator operation = select(opcode);
+	fptrOperator operation = NULL;
+	operation = operations[opcode];
 	return operation(num1, num2);
 }
 
 int main()
 {
+	InitOper();
 	std::cout << evaluate('+', 10, 20) << std::endl;
 	std::cout << evaluate('-', 10, 20) << std::endl;
 }
