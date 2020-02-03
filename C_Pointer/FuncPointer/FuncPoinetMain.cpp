@@ -1,15 +1,24 @@
 #include <iostream>
 
-int square(int num)
+int add(int numA, int numB)
 {
-	return num * num;
+	return numA + numB;
+}
+
+int sub(int numA, int numB)
+{
+	return numA - numB;
+}
+
+typedef int (*fptrOperator)(int, int);
+
+int compute(fptrOperator fptr, int num1, int num2)
+{
+	return fptr(num1, num2);
 }
 
 int main()
 {
-	int num = 10;
-	int (*fptr)(int);
-
-	fptr = square;
-	std::cout << num << " square " << fptr(num) << std::endl;
+	std::cout << compute(add, 10, 20) << std::endl;
+	std::cout << compute(sub, 10, 20) << std::endl;
 }
