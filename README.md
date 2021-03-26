@@ -1,1 +1,1 @@
-# C Pointer 책 공부용
+# C Pointer 책 공부용.
